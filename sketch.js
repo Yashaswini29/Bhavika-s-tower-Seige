@@ -2,7 +2,7 @@ const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
-const Render = Matter.Render;
+
 
 var engine,world
 
@@ -17,9 +17,9 @@ function setup(){
     engine = Engine.create()
     world = engine.world;
     var options = {
-        density:1
+        density:0.2
     }
-    polygon = Bodies.circle(100,200,30,options)
+    polygon = Bodies.circle(100,200,25,options)
     World.add(world,polygon)
     ground = new Ground(500,height,1000,20);
     stand1 = new Ground(390,350,250,10);
@@ -64,17 +64,7 @@ function setup(){
    
 slingshot = new Slingshot(polygon,{x:100,y:200})
 
-var render = Render.create({
-    element:document.body,
-    engine:engine,
-    options:{
-      width:1000,
-      height:700,
-      wireframes:false
-    }
-  })
-  
-  Render.run(render)
+
     
 
 }
@@ -131,4 +121,12 @@ function mouseDragged(){
 
 function mouseReleased(){
     slingshot.fly()
+}
+function keyPressed(){
+    if(keyCode === 32){
+      
+       slingshot.attach(polygon);
+     
+      
+    }
 }
